@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoKin - Espace Citoyen</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <input type="radio" name="nav-tab" id="tab-dashboard" checked>
+    <input type="radio" name="nav-tab" id="tab-signaler">
+    <input type="radio" name="nav-tab" id="tab-mes-signalements">
+    <input type="radio" name="nav-tab" id="tab-detail-signalement">
+    <input type="radio" name="nav-tab" id="tab-ecrire-article">
+    <input type="radio" name="nav-tab" id="tab-mes-articles">
+    <input type="radio" name="nav-tab" id="tab-profil">
+    <div class="app-container">
+       
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>EcoKin <span>🌱</span></h2>
+                <small>Kinshasa Propre</small>
+            </div>
+            <nav class="menu">
+                <label for="tab-dashboard" class="menu-item">Tableau de bord</label>
+                <label for="tab-signaler" class="menu-item"> Signaler un déchet</label>
+                <label for="tab-mes-signalements" class="menu-item">Historique de signalements</label>
+                <label for="tab-ecrire-article" class="menu-item">Écrire un article</label>
+                <label for="tab-mes-articles" class="menu-item">Mes articles</label>
+                <label for="tab-profil" class="menu-item">👤 Mon profil</label>
+            </nav>
+            <div class="sidebar-footer">
+               <label for="tab-profil" class="btn-logout">Déconnexion</label>
+            </div>
+        </aside>
+        <main class="main-content">
+           
+            <section class="content-section" id="content-dashboard">
+                <div class="welcome-header">
+                    <h1>Bonjour, IMBOTO</h1>
+                    <p>Ravi de vous revoir ! Ensemble, agissons pour la lute contre la salubrité de Kinshasa.</p>
+                </div>
+                <div class="widgets-grid">
+                    <div class="card card-widget">
+                        <h3>Total Signalements</h3>
+                        <p class="counter">12</p>
+                    </div>
+                    <div class="card card-widget">
+                        <h3>Signalements Traités</h3>
+                        <p class="counter text-green">8</p>
+                    </div>
+                    <div class="card card-widget">
+                        <h3>Articles Rédigés</h3>
+                        <p class="counter">3</p>
+                    </div>
+                    <div class="card card-widget">
+                        <h3>Articles Publiés</h3>
+                        <p class="counter text-green">2</p>
+                    </div>
+                </div>
+                <div class="quick-actions">
+                    <label for="tab-signaler" class="btn btn-primary">Nouveau signalement</label>
+                    <label for="tab-ecrire-article" class="btn btn-secondary">Écrire un article</label>
+                </div>
+                <div class="card table-card">
+                    <h2>Aperçu de mes derniers signalements</h2>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dépôt sauvage de plastique</td>
+                                <td>02/07/2026</td>
+                                <td><span class="badge badge-pending">🟠 En attente</span></td>
+                            </tr>
+                            <tr>
+                                <td>Décharge sauvage dégagée</td>
+                                <td>28/06/2026</td>
+                                <td><span class="badge badge-success">🟢 Traité</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="content-section" id="content-signaler">
+                <h1>Signaler un déchet</h1>
+                <div class="card">
+                    <form action="#" method="POST" class="app-form">
+                        <div class="form-group">
+                            <label for="desc-signalement">Description du problème</label>
+                            <textarea id="desc-signalement" rows="4" placeholder="Décrivez les déchets, le volume approximatif..." required></textarea>
+                        </div>
+                       
+                        <div class="form-group">
+                            <label for="photo-signalement">Preuve en photo (Optionnel)</label>
+                            <input type="file" id="photo-signalement" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse-signalement">Adresse / Point de repère précis</label>
+                            <input type="text" id="adresse-signalement" placeholder="Ex: avenu bope N°12 Q/2 C/Mont-ngafula" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Sélection GPS sur la carte (Cliquez pour placer le marqueur)</label>
+                            <div class="mock-map">
+                                <span style="color: #666; font-size: 0.9rem;">[ Simulation Carte Interactive : Clic pour remplir les coordonnées ]</span>
+                            </div>
+                            <div class="geo-inputs">
+                                <input type="text" placeholder="Latitude" readonly value="-4.3214">
+                                <input type="text" placeholder="Longitude" readonly value="15.3081">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Envoyer le signalement</button>
+                    </form>
+                </div>
+            </section>
+            <section class="content-section" id="content-mes-signalements">
+                <div class="section-header">
+                    <h1>Mes signalements</h1>
+                    <div class="filter-box">
+                        <label for="filter-status">Filtrer par statut :</label>
+                        <select id="filter-status">
+                            <option value="all">Tous</option>
+                            <option value="pending">En attente</option>
+                            <option value="success">Traité</option>
+                            <option value="rejected">Rejeté</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="card table-card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Date</th>
+                                <th>Localisation</th>
+                                <th>Statut</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Caniveau bouché par des bouteilles</td>
+                                <td>02/07/2026</td>
+                                <td>Limete, 7e Rue</td>
+                                <td><span class="badge badge-pending">🟠 En attente</span></td>
+                                <td><label for="tab-detail-signalement" class="btn-link">Voir détails</label></td>
+                            </tr>
+                            <tr>
+                                <td>Tas d'immondices sur la chaussée</td>
+                                <td>25/06/2026</td>
+                                <td>Ngaliema, Binza</td>
+                                <td><span class="badge badge-success">🟢 Traité</span></td>
+                                <td><label for="tab-detail-signalement" class="btn-link">Voir détails</label></td>
+                            </tr>
+                            <tr>
+                                <td>Pneus abandonnés</td>
+                                <td>15/06/2026</td>
+                                <td>Masina, Sans-Fil</td>
+                                <td><span class="badge badge-rejected">🔴 Rejeté</span></td>
+                                <td><label for="tab-detail-signalement" class="btn-link">Voir détails</label></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="content-section" id="content-detail-signalement">
+                <div class="section-header">
+                    <h1>Détail du signalement #SK-2409</h1>
+                    <label for="tab-mes-signalements" class="btn btn-secondary">Retour à la liste</label>
+                </div>
+                <div class="detail-grid">
+                    <div class="card">
+                        <h2>Informations générales</h2>
+                        <hr>
+                        <p><strong>Statut :</strong> <span class="badge badge-pending">🟠 En attente de validation</span></p>
+                        <p><strong>Date de création :</strong> 02/07/2026 à 14:32</p>
+                        <p><strong>Description :</strong></p>
+                        <p class="text-muted">Grand tas de bouteilles plastiques accumulées bloquant totalement le passage de l'eau dans le collecteur principal.</p>
+                        <p><strong>Adresse :</strong> Limete, résidentiel, 7ème rue industrielle.</p>
+                    </div>
+                    <div class="card">
+                        <h2>Médias & Géolocalisation</h2>
+                        <hr>
+                        <p><strong>Photo transmise :</strong></p>
+                        <div class="mock-photo">📷 [ Photo du déchet ]</div>
+                        <p><strong>Mini-carte :</strong></p>
+                        <div class="mock-map-mini">Map (-4.3214, 15.3081)</div>
+                    </div>
+                </div>
+            </section>
+            <section class="content-section" id="content-ecrire-article">
+                <h1>Écrire un article citoyen</h1>
+               
+                <div class="alert alert-info">
+                    <strong>Note importante :</strong> Votre article sera examiné par l'équipe de modération de l'administration EcoKin (Mr MBALI MANASSE) avant d'être publié officiellement sur la plateforme.
+                </div>
+                <div class="card">
+                    <form action="#" method="POST" class="app-form">
+                        <div class="form-group">
+                            <label for="titre-article">Titre de l'article</label>
+                            <input type="text" id="titre-article" placeholder="Ex: 5 astuces pour réduire le plastique à Lemba" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="couverture-article">Image de couverture (Optionnel)</label>
+                            <input type="file" id="couverture-article" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label>Contenu de l'article</label>
+                            <div class="editor-toolbar">
+                                <button type="button"><b>B</b></button>
+                                <button type="button"><i>I</i></button>
+                                <button type="button"><u>U</u></button>
+                                <button type="button">Lien</button>
+                                <button type="button">Liste</button>
+                            </div>
+                            <textarea id="contenu-article" rows="10" placeholder="Rédigez votre article ici..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Soumettre pour validation</button>
+                    </form>
+                </div>
+            </section>
+            <section class="content-section" id="content-mes-articles">
+                <div class="section-header">
+                    <h1>Mes articles rédigés</h1>
+                    <label for="tab-ecrire-article" class="btn btn-primary">Rédiger un nouvel article</label>
+                </div>
+                <div class="card table-card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Date de soumission</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Le calvaire des inondations à Bandalungwa</td>
+                                <td>30/06/2026</td>
+                                <td><span class="badge badge-success">🟢 Publié</span></td>
+                                <td>
+                                    <button class="btn-action">👁️ Voir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Compostage à domicile : Mon expérience à Kintambo</td>
+                                <td>01/07/2026</td>
+                                <td><span class="badge badge-pending">🟠 En attente</span></td>
+                                <td>
+                                    <button class="btn-action">👁️ Voir</button>
+                                    <button class="btn-action text-orange">Modifier</button>
+                                    <button class="btn-action text-red">🗑️ Supprimer</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pourquoi il faut interdire les sachets à Kin</td>
+                                <td>10/06/2026</td>
+                                <td><span class="badge badge-rejected">🔴 Rejeté</span></td>
+                                <td>
+                                    <button class="btn-action text-red">🗑️ Supprimer</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <section class="content-section" id="content-profil">
+                <h1>👤 Mon Profil Citoyen</h1>
+               
+                <div class="detail-grid">
+                    <div class="card">
+                        <h2>Informations personnelles</h2>
+                        <hr>
+                        <form action="#" method="POST" class="app-form">
+                            <div class="form-group">
+                                <label for="profil-nom">Nom</label>
+                                <input type="text" id="profil-nom" value="Tshisekedi">
+                            </div>
+                            <div class="form-group">
+                                <label for="profil-prenom">Prénom</label>
+                                <input type="text" id="profil-prenom" value="Felix">
+                            </div>
+                            <div class="form-group">
+                                <label for="profil-email">Adresse Email</label>
+                                <input type="email" id="profil-email" value="felix@ecokin.cd">
+                            </div>
+                            <div class="form-group">
+                                <label for="profil-commune">Commune de résidence</label>
+                                <select id="profil-commune">
+                                    <option value="Gombe">Gombe</option>
+                                    <option value="Limete" selected>Limete</option>
+                                    <option value="Ngaliema">Ngaliema</option>
+                                    <option value="Lemba">Lemba</option>
+                                    <option value="Bandalungwa">Bandalungwa</option>
+                                    <option value="Masina">Masina</option>
+                                    <option value="Mont- ngafula">Mont-ngafula</option>
+                                    <option value="Ngiringiri">Ngiringiri</option>
+                                    <option value="Ndjili">Ndjili</option>
+                                    <option value="Kimbanseke">Kimbanseke</option>
+                                    <option value="Makala">Makala</option>
+                                    <option value="Maluku">Maluku</option>
+                                    <option value="Kisensu">Kisensu</option>
+                                    <option value="Bumbu">Bumbu</option>
+                                    <option value="Selembao">Selembao</option>
+                                    <option value="Matete">Matete</option>
+                                    <option value="Lingwala">Lingwala</option>
+                                    <option value="kitambo">kitambo</option>
+                                    <option value="Kasavubu">Kasavubu</option>
+                                    <option value="Kalamu">Kalamu</option>
+                                    <option value="Ngaba">Ngaba</option>
+                                    <option value="Nsele">Nsele</option>
+                                    <option value="Kinshasa">Kinshasa</option>
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary"> Sauvegarder les modifications</button>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <h2>Sécurité & Compte</h2>
+                        <hr>
+                        <form action="#" method="POST" class="app-form">
+                            <div class="form-group">
+                                <label for="old-pwd">Mot de passe actuel</label>
+                                <input type="password" id="old-pwd" placeholder="••••••••">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-pwd">Nouveau mot de passe</label>
+                                <input type="password" id="new-pwd" placeholder="Minimum 8 caractères">
+                            </div>
+                            <button type="submit" class="btn btn-secondary">Changer mon mot de passe</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
