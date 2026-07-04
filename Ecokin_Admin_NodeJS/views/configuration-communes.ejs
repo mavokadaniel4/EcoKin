@@ -1,0 +1,58 @@
+<%- include('partials/header') %>
+
+<div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2 fw-bold text-dark">Infrastructures urbaines & Points de Collecte</h1>
+</div>
+
+<% if (msg) { %>
+<div class="alert alert-success"><%= msg %></div>
+<% } %>
+
+<div class="row g-4">
+    <!-- Formulaire d'ajout de point d'apport volontaire -->
+    <div class="col-md-4">
+        <div class="card card-custom shadow-sm border-0 p-4 bg-white">
+            <h5 class="fw-bold mb-3" style="color: var(--eco-green);"><i class="bi bi-plus-circle-fill me-2"></i>Nouveau Bac / Centre</h5>
+            <form method="POST" action="/configuration-communes">
+                <div class="mb-3">
+                    <label class="form-label small fw-bold text-muted">Nom du Point de Collecte</label>
+                    <input type="text" name="nom" class="form-control" placeholder="Ex: Point d'apport Baramoto" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold text-muted">Commune Responsable</label>
+                    <select name="commune" class="form-select">
+                        <option>Gombe</option><option>Limete</option><option>Ngaliema</option><option>Bandalungwa</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label small fw-bold text-muted">Coordonnées d'ancrage (Lat, Long)</label>
+                    <input type="text" name="coordonnees" class="form-control" placeholder="-4.3121, 15.3142">
+                </div>
+                <button type="submit" class="btn btn-success w-100 fw-bold mt-2" style="background-color: var(--eco-green); border:none;">Enregistrer sur l'application</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Liste des communes et bacs publics répertoriés -->
+    <div class="col-md-8">
+        <div class="card card-custom shadow-sm border-0 bg-white">
+            <div class="card-header bg-white fw-bold py-3">Infrastructures d'assainissement actives sur la carte citoyenne</div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <% points.forEach(function(p) {
+                        let badge = 'bg-secondary';
+                        if ((p.type||'').toLowerCase().includes('centre')) badge = 'bg-primary';
+                        else if ((p.type||'').toLowerCase().includes('plastique')) badge = 'bg-success';
+                    %>
+                    <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                        <%= p.nom %> — <%= p.commune %>
+                        <span class="badge <%= badge %> rounded-pill"><%= p.type %></span>
+                    </li>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

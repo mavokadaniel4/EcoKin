@@ -1,0 +1,25 @@
+{
+  "name": "projet-de-recherche",
+  "version": "1.0.0",
+  "description": "Backend Node.js (Express + EJS) remplaçant l'ancienne version PHP. Les vues HTML/CSS/Bootstrap sont conservées à l'identique.",
+  "main": "db.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mongoose": "^9.7.3",
+    "mysql2": "^3.22.5"
+  }
+}

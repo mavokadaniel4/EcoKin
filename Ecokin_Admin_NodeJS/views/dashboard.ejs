@@ -1,0 +1,77 @@
+<%- include('partials/header') %>
+
+<div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2 fw-bold text-dark">Vue d'ensemble de la Ville</h1>
+</div>
+
+<!-- CARDS STATISTIQUES AVEC BORDURES COLORES DE CHARTE -->
+<div class="row g-3 mb-4">
+    <div class="col-md-3">
+        <div class="card card-custom p-3 shadow-sm bg-white" style="border-left: 5px solid var(--status-waiting);">
+            <div class="d-flex justify-content-between align-items-center">
+                <div><h6 class="text-muted text-uppercase small fw-bold">Signalements Actifs</h6><h3 class="fw-bold m-0"><%= stat_signalements %></h3></div>
+                <i class="bi bi-exclamation-triangle fs-2 text-warning"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-custom p-3 shadow-sm bg-white" style="border-left: 5px solid var(--status-success);">
+            <div class="d-flex justify-content-between align-items-center">
+                <div><h6 class="text-muted text-uppercase small fw-bold">Dépôts Traités</h6><h3 class="fw-bold m-0"><%= Number(stat_traites).toLocaleString('en-US') %></h3></div>
+                <i class="bi bi-check-circle fs-2 text-success"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-custom p-3 shadow-sm bg-white" style="border-left: 5px solid #2196f3;">
+            <div class="d-flex justify-content-between align-items-center">
+                <div><h6 class="text-muted text-uppercase small fw-bold">Citoyens Engagés</h6><h3 class="fw-bold m-0"><%= Number(stat_citoyens).toLocaleString('en-US') %></h3></div>
+                <i class="bi bi-people fs-2 text-primary"></i>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card card-custom p-3 shadow-sm bg-white" style="border-left: 5px solid #9c27b0;">
+            <div class="d-flex justify-content-between align-items-center">
+                <div><h6 class="text-muted text-uppercase small fw-bold">Articles Publiés</h6><h3 class="fw-bold m-0"><%= stat_articles %></h3></div>
+                <i class="bi bi-newspaper fs-2" style="color: #9c27b0;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ANALYSES ET RAPPORTS TEMPS RÉEL -->
+<div class="row g-4">
+    <div class="col-md-7">
+        <div class="card card-custom shadow-sm bg-white">
+            <div class="card-header bg-white fw-bold py-3 text-dark border-0"><i class="bi bi-clock-history me-2 text-success"></i>Dernières Alertes Citoyennes</div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    <% dernieres_alertes.forEach(function(a) { %>
+                        <li class="list-group-item d-flex justify-content-between align-items-center py-3">
+                            <%= a.citoyen %> — <%= a.commune %>
+                            <% if (a.statut == 'en attente') { %><span class="badge badge-waiting">🟠 En attente</span>
+                            <% } else if (a.statut == 'traité') { %><span class="badge badge-success-eco">🟢 Traité</span>
+                            <% } else { %><span class="badge badge-danger-eco">🔴 Rejeté</span><% } %>
+                        </li>
+                    <% }); %>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="card card-custom shadow-sm bg-white">
+            <div class="card-header bg-white fw-bold py-3 text-dark border-0"><i class="bi bi-bar-chart me-2 text-success"></i>Activité par Commune (Kinshasa)</div>
+            <div class="card-body">
+                <% const bars = ['bg-success','bg-warning','bg-info']; activite.forEach(function(a, i) { %>
+                    <p class="mb-1 small fw-bold"><%= a.commune %> (<%= a.pct %>%)</p>
+                    <div class="progress mb-3 shadow-sm" style="height: 10px;">
+                        <div class="progress-bar <%= bars[i] || 'bg-success' %>" style="width: <%= a.pct %>%<%= i===0?'; background-color: var(--eco-green) !important;':'' %>"></div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer') %>
